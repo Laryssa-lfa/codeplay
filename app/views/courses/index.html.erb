@@ -1,0 +1,12 @@
+<h1>Cursos Disponíveis</h1>
+
+<% @courses.each do |course| %>
+    <h3>Curso: <%= link_to course.name, course %></h3>
+    <h4>Descrição: <%= course.description %></h4>
+    <h4>Código do curso: <%= course.code %></h4>
+    <h4>Valor: <%= "R$ #{course.price},00" %></h4>
+    <h4>Data limite matrícula: <%= course.enrollment_deadline %></h4>
+    <br>
+<% end %>
+
+<p><%= link_to 'Voltar', root_path %></p>

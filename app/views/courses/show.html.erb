@@ -1,0 +1,8 @@
+<h1>Detalhes do curso <%= @course.name %></h1>
+
+<h3>Descrição: <%= @course.description %></h3>
+<h3>Código do curso: <%= @course.code %></h3>
+<h3>Valor: <%= "R$ #{@course.price},00" %></h3>
+<h3>Data limite matrícula: <%= @course.enrollment_deadline %></h3>
+
+<p><%= link_to 'Voltar', courses_path %></p>
