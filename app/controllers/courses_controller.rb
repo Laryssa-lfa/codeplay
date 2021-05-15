@@ -1,9 +1,6 @@
 class CoursesController < ApplicationController
     def index
         @courses = Course.all
-        #if @courses.empty?
-        #    flash[:alert] = "Nenhum curso disponível"
-        #end
     end
 
     def show
@@ -16,12 +13,7 @@ class CoursesController < ApplicationController
 
     def create
         @course = Course.create(course_params)
-        if @course.save
-            redirect_to root_path
-        else
-            flash[:alert] = "Nenhum curso disponível"
-            render :new
-        end
+        @course.save
     end
 
     private

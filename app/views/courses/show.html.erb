@@ -1,8 +1,14 @@
 <h1>Detalhes do curso <%= @course.name %></h1>
 
-<h3>Descrição: <%= @course.description %></h3>
-<h3>Código do curso: <%= @course.code %></h3>
-<h3>Valor: <%= "R$ #{@course.price},00" %></h3>
-<h3>Data limite matrícula: <%= @course.enrollment_deadline %></h3>
+<dl>
+  <dt>Descrição</dt>
+  <dd><%= @course.description %></dd>
+  <dt>Código do curso</dt>
+  <dd><%= @course.code %></h3></dd>
+  <dt>Valor</dt>
+  <dd><%= number_to_currency @course.price, unit: 'R$', separator: ',', delimiter: '.', format: '%u %n' %></dd>
+  <dt>Data limite matrícula</dt>
+  <dd><%= @course.enrollment_deadline.strftime('%d/%m/%Y') %></dd>
+</dl>
 
 <p><%= link_to 'Voltar', courses_path %></p>
