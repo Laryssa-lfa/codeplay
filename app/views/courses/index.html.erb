@@ -1,8 +1,8 @@
 <% if @courses.empty? %>
-  <h3>Nenhum curso disponível</h3>
+  <h2>Nenhum curso disponível</h2>
+<% else %>
+    <h1>Cursos Disponíveis</h1>
 <% end %>
-
-<h1>Cursos Disponíveis</h1>
 
 <% @courses.each do |course| %>
     <h3>Curso: <%= link_to course.name, course %></h3>
@@ -11,4 +11,6 @@
     <br>
 <% end %>
 
+<br>
 <p><%= link_to 'Voltar', root_path %></p>
+<p><%= link_to 'Registrar um Curso', new_course_path %></p>

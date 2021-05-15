@@ -5,9 +5,9 @@
   <dd><%= @course.description %></dd>
   <dt>Código do curso</dt>
   <dd><%= @course.code %></h3></dd>
-  <dt>Valor</dt>
+  <dt>Preço</dt>
   <dd><%= number_to_currency @course.price, unit: 'R$', separator: ',', delimiter: '.', format: '%u %n' %></dd>
-  <dt>Data limite matrícula</dt>
+  <dt>Data limite de matrícula</dt>
   <dd><%= @course.enrollment_deadline.strftime('%d/%m/%Y') %></dd>
 </dl>
 

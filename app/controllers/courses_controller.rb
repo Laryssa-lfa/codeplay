@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
     def create
         @course = Course.create(course_params)
         @course.save
+        redirect_to @course
     end
 
     private
