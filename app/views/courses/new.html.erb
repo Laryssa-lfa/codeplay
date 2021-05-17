@@ -1,3 +1,13 @@
+<% if @course.errors.any? %>
+    <div id = "error_explanation">
+      <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
 <h1>Criando um curso</h1>
 
 <%= form_for @course do |c| %>
