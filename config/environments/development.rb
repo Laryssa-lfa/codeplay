@@ -70,4 +70,11 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Store files locally.
+  config.active_storage.service = :local
+
+  # Store uploaded files on the local file system in a temporary directory.
+  config.active_storage.service = :test
+  
 end

@@ -1,0 +1,12 @@
+<h1>Detalhes do Professor(a) <%= @instructor.name %></h1>
+
+<dl>
+  <dt>E-mail:</dt>
+  <dd><%= @instructor.email %></dd>
+  <dt>Descrição:</dt>
+  <dd><%= @instructor.bio %></dd>
+  <dt>Foto do Perfil:</dt>
+  <dd><input name="profile_picture" type="image" data-direct-upload-url="<%= rails_direct_uploads_url %>" /></dd>
+</dl>
+
+<%= link_to "Voltar", instructors_path %>
