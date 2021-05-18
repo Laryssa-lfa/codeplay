@@ -13,17 +13,14 @@ class InstructorsController < ApplicationController
 
     def create
         @instructor = Instructor.create(instructor_params)
-        
-        session[:instructor_id] = instructor.id
-        @instructor.profile_picture.attach(io: File.open('./storage'), filename: :profile_picture, content_type: "image/png" )
-        
-        @instructor.save
+        @instructor.profile_picture.attach(io: File.open(Rails.root.join('tmp', 'storage', @instructor.image_name)),
+                                           filename: @instructor.image_name, content_type: "image/png" )
         redirect_to @instructor
     end
 
     private
 
     def instructor_params
-        params.require(:instructor).permit(:name, :email, :bio, :profile_picture)
+        params.require(:instructor).permit(:name, :email, :bio, :profile_picture, :image_name)
     end
 end

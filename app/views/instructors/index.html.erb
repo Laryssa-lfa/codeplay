@@ -6,7 +6,7 @@
 
 <% @instructors.each do |instructor| %>
     <h3>Professor(a): <%= link_to instructor.name, instructor %></h3>
-    <input name= "profile_picture" type="image" data-direct-upload-url="<%= rails_direct_uploads_url %>" />
+    <img <%= image_tag instructor.image_name %>>
     <br>
 <% end %>
 

@@ -30,11 +30,8 @@ describe 'Admin registers courses' do
     expect(page).to have_link('Voltar')
   end
 
-#Cadastrar curso com os campos corretos #5
+#Issues 5 - Cadastrar curso com os campos corretos
   it 'and attributes cannot be blank' do
-    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                   code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
 
     visit root_path
     click_on 'Cursos'

@@ -6,7 +6,7 @@
   <dt>Descrição:</dt>
   <dd><%= @instructor.bio %></dd>
   <dt>Foto do Perfil:</dt>
-  <dd><input name="profile_picture" type="image" data-direct-upload-url="<%= rails_direct_uploads_url %>" /></dd>
+  <img <%= image_tag @instructor.image_name %>>
 </dl>
 
 <%= link_to "Voltar", instructors_path %>
