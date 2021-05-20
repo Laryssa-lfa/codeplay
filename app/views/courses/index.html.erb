@@ -8,9 +8,9 @@
     <h3>Curso: <%= link_to course.name, course %></h3>
     <h4>Descrição: <%= course.description %></h4>
     <h4><%= number_to_currency course.price, unit: 'R$', separator: ',', delimiter: '.', format: '%u %n' %></h4>
-    <br>
 <% end %>
 
 <br>
-<p><%= link_to 'Voltar', root_path %></p>
-<p><%= link_to 'Registrar um Curso', new_course_path %></p>
+<%= link_to 'Registrar um Curso', new_course_path %>
+<br>
+<%= link_to 'Voltar', root_path %>

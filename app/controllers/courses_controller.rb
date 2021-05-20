@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
     end
 
     def create
-        @course = Course.create(course_params)
+        @course = Course.new(course_params)
         if @course.save
             redirect_to @course, notice: 'Curso criado com sucesso'
         else
@@ -21,10 +21,21 @@ class CoursesController < ApplicationController
         end
     end
 
+    def update
+        @course = Course.update(course_params)
+        redirect_to @course, notice: 'Curso atualizado com sucesso'
+    end
+
+    def destroy
+        @course.destroy
+        redirect_to courses_path, notice: 'Curso apagado com sucesso'
+    end
+
     private
 
     def course_params
-        params.require(:course).permit(:name, :description, :code, :price, :enrollment_deadline)
+        params.require(:course).permit(:name, :description, :code, :price,
+                                       :enrollment_deadline, :banner)
     end
 
     def set_course
