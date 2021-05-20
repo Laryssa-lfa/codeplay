@@ -1,13 +1,14 @@
 <% if @instructors.empty? %>
-    <h2>Nenhum Professor cadastrado!</h2>
+    <h2>Nenhum Professor(a) registrado!</h2>
 <% else %>
     <h2>Professores Disponíveis</h2>
 <% end %>
 
 <% @instructors.each do |instructor| %>
     <h3>Professor(a): <%= link_to instructor.name, instructor %></h3>
-    <img <%= image_tag instructor.image_name %>>
     <br>
 <% end %>
 
-<p><%= link_to "Voltar", root_path %></p>
+<%= link_to "Registrar professor(a)", new_instructor_path %>
+<br>
+<%= link_to "Voltar", root_path %>

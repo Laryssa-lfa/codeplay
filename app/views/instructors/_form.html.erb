@@ -1,0 +1,27 @@
+<% if @instructor.errors.any? %>
+    <div id = "error_explanation">
+      <ul>
+        <% @instructor.errors.each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<%= form_with model: @instructor do |i| %>
+  <%= i.label :name, 'Nome:' %>
+  <%= i.text_field :name %>
+  <br>
+  <%= i.label :email, 'E-mail:' %>
+  <%= i.email_field :email %>
+  <br>
+  <%= i.label :bio, 'Descrição:' %>
+  <%= i.text_area :bio %>
+  <br>
+  <%= i.label :profile_picture, 'Foto de perfil:' %>
+  <%= i.file_field :profile_picture %>
+  <br>
+  <%= i.submit 'Salvar' %>
+<% end %>
+
+<%= link_to "Voltar", instructors_path %>

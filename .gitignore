@@ -21,7 +21,7 @@
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
-
+/tmp/storage/*
 
 /public/assets
 .byebug_history
@@ -36,3 +36,4 @@
 yarn-debug.log*
 .yarn-integrity
 rspec.txt
+/spec/fixtures/*

@@ -6,7 +6,13 @@
   <dt>Descrição:</dt>
   <dd><%= @instructor.bio %></dd>
   <dt>Foto do Perfil:</dt>
-  <img <%= image_tag @instructor.image_name %>>
+  <% if @instructor.profile_picture.attached? %>
+    <%= image_tag @instructor.profile_picture %>
+  <% end %>
 </dl>
 
+<%= link_to "Editar", edit_instructor_path(@instructor) %>
+<br>
+<%= link_to "Apagar", @instructor, method: :delete %>
+<br>
 <%= link_to "Voltar", instructors_path %>

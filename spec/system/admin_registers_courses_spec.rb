@@ -30,7 +30,6 @@ describe 'Admin registers courses' do
     expect(page).to have_link('Voltar')
   end
 
-#Issues 5 - Cadastrar curso com os campos corretos
   it 'and attributes cannot be blank' do
 
     visit root_path
