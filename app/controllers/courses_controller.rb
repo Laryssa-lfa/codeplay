@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
     def create
         @course = Course.new(course_params)
         if @course.save
-            redirect_to @course, notice: 'Curso criado com sucesso'
+            redirect_to @course, notice: t('.success')
         else
             render :new
         end
@@ -23,12 +23,12 @@ class CoursesController < ApplicationController
 
     def update
         @course = Course.update(course_params)
-        redirect_to @course, notice: 'Curso atualizado com sucesso'
+        redirect_to @course, notice: t('.success')
     end
 
     def destroy
         @course.destroy
-        redirect_to courses_path, notice: 'Curso apagado com sucesso'
+        redirect_to courses_path, notice: t('.success')
     end
 
     private

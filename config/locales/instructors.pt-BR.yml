@@ -1,0 +1,20 @@
+---
+  pt-BR:
+    instructors:
+      create:
+        success: 'Professor(a) registrado com sucesso!'
+      update:
+        success: 'Professor(a) atualizado(a) com sucesso!'
+      destroy:
+        success: 'Professor(a) apagado com sucesso!'
+
+    activerecord:
+      models:
+        instructor: 'Professor(a)'
+      attributes:
+        instructor:
+          name: 'Nome'
+          email: 'E-mail'
+          bio: 'Descrição'
+          code: 'Código'
+          profile_picture: 'Foto de perfil'

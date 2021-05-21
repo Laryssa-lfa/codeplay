@@ -1,11 +1,11 @@
 <h1>Detalhes do Professor(a) <%= @instructor.name %></h1>
 
 <dl>
-  <dt>E-mail:</dt>
+  <dt><%= Instructor.human_attribute_name(:email) %></dt>
   <dd><%= @instructor.email %></dd>
-  <dt>Descrição:</dt>
+  <dt><%= Instructor.human_attribute_name(:bio) %></dt>
   <dd><%= @instructor.bio %></dd>
-  <dt>Foto do Perfil:</dt>
+  <dt><%= Instructor.human_attribute_name(:profile_picture) %></dt>
   <% if @instructor.profile_picture.attached? %>
     <%= image_tag @instructor.profile_picture %>
   <% end %>

@@ -15,9 +15,9 @@ class InstructorsController < ApplicationController
     def create
         @instructor = Instructor.create(instructor_params)
         if @instructor.save
-            redirect_to @instructor, notice: 'Professor(a) registrado com sucesso!'
+            redirect_to @instructor, notice: t('.success')
         else
-            render :new, notice: 'Nenhum Professor(a) registrado!'
+            render :new
         end
     end
 
@@ -26,12 +26,12 @@ class InstructorsController < ApplicationController
 
     def update
         @instructor.update(instructor_params)
-        redirect_to @instructor, notice: 'Professor(a) atualizado(a) com sucesso!'
+        redirect_to @instructor, notice: t('.success')
     end
 
     def destroy
         @instructor.destroy
-        redirect_to instructors_path, notice: 'Professor(a) apagado com sucesso!'
+        redirect_to instructors_path, notice: t('.success')
     end
 
     private

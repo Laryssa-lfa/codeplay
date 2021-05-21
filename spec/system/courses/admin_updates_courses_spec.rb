@@ -13,7 +13,7 @@ describe 'admin updates courses' do
     fill_in 'Código', with: 'RUBYONRAILS'
     fill_in 'Preço', with: '30'
     fill_in 'Data limite de matrícula', with: '22/12/2033'
-    click_on 'Salvar'
+    click_on 'Atualizar'
 
     expect(page).to have_text('Ruby on Rails')
     expect(page).to have_text('Um curso de RoR')

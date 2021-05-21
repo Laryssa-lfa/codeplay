@@ -14,11 +14,11 @@ describe 'Admin registers instructors' do
     click_on 'Professores'
     click_on 'Registrar professor(a)'
     
-    fill_in 'Nome:', with: 'Maria'
-    fill_in 'E-mail:', with: 'maria@email.com'
-    fill_in 'Descrição:', with: 'Formada em Ciências da Computação e leciona há 9 anos.'
-    attach_file 'Foto de perfil:', Rails.root.join('spec/fixtures/Maria.png')
-    click_on 'Salvar'
+    fill_in 'Nome', with: 'Maria'
+    fill_in 'E-mail', with: 'maria@email.com'
+    fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 9 anos.'
+    attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/Maria.png')
+    click_on 'Criar'
 
     expect(page).to have_content('Professor(a) registrado com sucesso!')
     expect(page).to have_content('Maria')
@@ -33,12 +33,12 @@ describe 'Admin registers instructors' do
     click_on 'Professores'
     click_on 'Registrar professor(a)'
     
-    fill_in 'Nome:', with: ''
-    fill_in 'E-mail:', with: ''
-    fill_in 'Descrição:', with: ''
-    click_on 'Salvar'
+    fill_in 'Nome', with: ''
+    fill_in 'E-mail', with: ''
+    fill_in 'Descrição', with: ''
+    click_on 'Criar'
 
-    expect(page).to have_content('está em branco, por favor preencher.', count: 2)
+    expect(page).to have_content('não pode ficar em branco', count: 2)
   end
 
   it 'and e-mail must be unique' do
@@ -48,9 +48,9 @@ describe 'Admin registers instructors' do
     visit root_path
     click_on 'Professores'
     click_on 'Registrar professor(a)'
-    fill_in 'E-mail:', with: 'jose@email.com'
-    click_on 'Salvar'
+    fill_in 'E-mail', with: 'jose@email.com'
+    click_on 'Criar'
 
-    expect(page).to have_content('já em uso!')
+    expect(page).to have_content('já está em uso')
   end
 end

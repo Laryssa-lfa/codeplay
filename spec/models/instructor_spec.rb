@@ -7,8 +7,8 @@ describe Instructor do
 
       instructor.valid?
 
-      expect(instructor.errors[:name]).to include('está em branco, por favor preencher.')
-      expect(instructor.errors[:email]).to include('está em branco, por favor preencher.')
+      expect(instructor.errors[:name]).to include('não pode ficar em branco')
+      expect(instructor.errors[:email]).to include('não pode ficar em branco')
     end
 
     it 'email must be uniq' do
@@ -18,7 +18,7 @@ describe Instructor do
 
       instructor.valid?
 
-      expect(instructor.errors[:email]).to include('já em uso!')
+      expect(instructor.errors[:email]).to include('já está em uso')
     end
   end
 end

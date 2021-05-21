@@ -6,14 +6,14 @@
 <h1>Detalhes do curso <%= @course.name %></h1>
 
 <dl>
-  <dt>Descrição</dt>
+  <dt><%= Course.human_attribute_name(:description) %></dt>
   <dd><%= @course.description %></dd>
-  <dt>Código do curso</dt>
-  <dd><%= @course.code %></h3></dd>
-  <dt>Preço</dt>
-  <dd><%= number_to_currency @course.price, unit: 'R$', separator: ',', delimiter: '.', format: '%u %n' %></dd>
-  <dt>Data limite de matrícula</dt>
-  <dd><%= @course.enrollment_deadline.strftime('%d/%m/%Y') %></dd>
+  <dt><%= Course.human_attribute_name(:code) %></dt>
+  <dd><%= @course.code %></dd>
+  <dt><%= Course.human_attribute_name(:price) %></dt>
+  <dd><%= number_to_currency @course.price %></dd>
+  <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
+  <dd><%= I18n.localize @course.enrollment_deadline %></dd>
 </dl>
 
 <br>

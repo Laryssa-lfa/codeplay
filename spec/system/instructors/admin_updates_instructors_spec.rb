@@ -8,9 +8,9 @@ describe 'Admin updates instructors' do
     visit instructor_path(instructor)
     click_on 'Editar'
 
-    fill_in 'Descrição:', with: 'Formada em Ciências da Computação e leciona há 10 anos.'
-    attach_file 'Foto de perfil:', Rails.root.join('spec/fixtures/Maria.png')
-    click_on 'Salvar'
+    fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 10 anos.'
+    attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/Maria.png')
+    click_on 'Atualizar'
 
     expect(page).to have_text('Maria')
     expect(page).to have_text('maria@email.com')

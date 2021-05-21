@@ -1,33 +1,33 @@
 <% if @course.errors.any? %>
   <div id = "error_explanation">
     <ul>
-      <% @course.errors.each do |error| %>
-        <li><%= error.message %></li>
+      <% @course.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
 <%= form_with model: @course do |c| %>
-  <%= c.label :name, 'Nome: ' %>
+  <%= c.label :name %>
   <%= c.text_field :name %>
   <br>
-  <%= c.label :description, 'Descrição: ' %>
+  <%= c.label :description %>
   <%= c.text_field :description %>
   <br>
-  <%= c.label :code, 'Código do curso: ' %>
+  <%= c.label :code %>
   <%= c.text_field :code %>
   <br>
-  <%= c.label :price, 'Preço do curso: ' %>
+  <%= c.label :price %>
   <%= c.text_field :price %>
   <br>
-  <%= c.label :enrollment_deadline, 'Data limite de matrícula: ' %>
+  <%= c.label :enrollment_deadline %>
   <%= c.date_field :enrollment_deadline %>
   <br>
-  <%= c.label :banner, 'Banner:' %>
+  <%= c.label :banner %>
   <%= c.file_field :banner %>
   <br>
-  <%= c.submit 'Salvar' %>
+  <%= c.submit %>
 <% end %>
 
 <br>

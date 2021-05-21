@@ -1,0 +1,23 @@
+---
+  pt-BR:
+    courses:
+      new:
+        title: 'Registrar um curso'
+      create:
+        success: 'Curso criado com sucesso'
+      update:
+        success: 'Curso atualizado com sucesso'
+      destroy:
+        success: 'Curso apagado com sucesso'
+
+    activerecord:
+      models:
+        course: 'Curso'
+      attributes:
+        course:
+          name: 'Nome'
+          description: 'Descrição'
+          price: 'Preço'
+          code: 'Código'
+          enrollment_deadline: 'Data limite de matrícula'
+          banner: 'Banner'
