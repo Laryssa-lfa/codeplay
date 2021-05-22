@@ -21,3 +21,5 @@
           code: 'Código'
           enrollment_deadline: 'Data limite de matrícula'
           banner: 'Banner'
+          intructor_id: Instrutor(a)
+          instructor: Instrutor(a)

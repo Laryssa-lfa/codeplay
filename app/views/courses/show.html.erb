@@ -14,6 +14,8 @@
   <dd><%= number_to_currency @course.price %></dd>
   <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
   <dd><%= I18n.localize @course.enrollment_deadline %></dd>
+  <dt>Instructor(a)</dt>
+  <dd><%= @course.instructor.name %></dd>
 </dl>
 
 <br>

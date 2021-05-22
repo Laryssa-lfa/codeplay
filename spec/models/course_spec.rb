@@ -13,9 +13,11 @@ describe Course do
     end
 
     it 'code must be uniq' do
+      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
+                                      bio: "Formada em Ciências da Computação e leciona há 9 anos.")
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                     code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033')
+                    enrollment_deadline: '22/12/2033', instructor: instructor)
       course = Course.new(code: 'RUBYBASIC')
 
       course.valid?
@@ -23,5 +25,4 @@ describe Course do
       expect(course.errors[:code]).to include('já está em uso')
     end
   end
-  
 end

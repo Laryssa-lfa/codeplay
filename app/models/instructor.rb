@@ -1,6 +1,12 @@
 class Instructor < ApplicationRecord
-    has_one_attached :profile_picture
+    has_many :courses
 
     validates :name, :email, presence: true
     validates :email, uniqueness: true
+
+    has_one_attached :profile_picture
+
+    def display_name
+        "#{name} - #{email}"
+    end
 end

@@ -1,14 +1,14 @@
-<% if @course.errors.any? %>
+<% if course.errors.any? %>
   <div id = "error_explanation">
     <ul>
-      <% @course.errors.full_messages.each do |error| %>
+      <% course.errors.full_messages.each do |error| %>
         <li><%= error %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
-<%= form_with model: @course do |c| %>
+<%= form_with model: course do |c| %>
   <%= c.label :name %>
   <%= c.text_field :name %>
   <br>
@@ -23,6 +23,9 @@
   <br>
   <%= c.label :enrollment_deadline %>
   <%= c.date_field :enrollment_deadline %>
+  <br>
+  <%= c.label :instructor_id, 'Instrutor(a)' %>
+  <%= c.collection_select :instructor_id, instructors, :id, :display_name %>
   <br>
   <%= c.label :banner %>
   <%= c.file_field :banner %>
