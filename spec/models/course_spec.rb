@@ -16,8 +16,8 @@ describe Course do
       instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
                                       bio: "Formada em Ciências da Computação e leciona há 9 anos.")
       Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', instructor: instructor)
+                     code: 'RUBYBASIC', price: 10,
+                     enrollment_deadline: '22/12/2033', instructor: instructor)
       course = Course.new(code: 'RUBYBASIC')
 
       course.valid?

@@ -1,0 +1,43 @@
+class LessonsController < ApplicationController
+  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_course
+
+  def show
+  end
+
+  def new
+    @lesson = Lesson.new
+  end
+
+  def create
+    @lesson = @course.lessons.create!(lesson_params)
+    redirect_to @course, notice: t('.success')
+  end
+
+  def edit
+  end
+
+  def update
+    @lesson.update(lesson_params)
+    redirect_to @course, notice: t('.success')
+  end
+
+  def destroy
+    @lesson.destroy
+    redirect_to course_path(params[:course_id]), notice: t('.success')
+  end
+
+  private
+
+  def lesson_params
+    params.require(:lesson).permit(:name, :duration, :content)
+  end
+
+  def set_lesson
+    @lesson = Lesson.find(params[:id])
+  end
+
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
+end

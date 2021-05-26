@@ -1,0 +1,23 @@
+---
+  pt-BR:
+    lessons:
+      create:
+        success: 'Aula cadastrada com sucesso'
+      update:
+        success: 'Aula atualizada com sucesso'
+      destroy:
+        success: 'Aula apagada com sucesso'
+
+    lesson:
+      duration:
+        one: '1 minuto'
+        other: '%{count} minutos'
+    
+    activerecord:
+      models:
+        lesson: 'Aula'
+      attributes:
+        lesson:
+          name: 'Nome'
+          content: 'Conteúdo'
+          duration: 'Duração'

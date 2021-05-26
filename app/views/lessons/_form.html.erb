@@ -1,0 +1,15 @@
+<%= form_with model: [course, lesson] do |l| %>
+  <%= l.label :name %>
+  <%= l.text_field :name %>
+  <br>
+  <%= l.label :duration %>
+  <%= l.number_field :duration, step: 1, min: 0 %>
+  <br>
+  <%= l.label :content %>
+  <%= l.text_field :content %>
+  <br>
+  <%= l.submit %>
+<% end %>
+
+<br>
+<%= link_to 'Voltar', course_path(course) %>

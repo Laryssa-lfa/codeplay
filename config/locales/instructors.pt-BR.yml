@@ -2,11 +2,11 @@
   pt-BR:
     instructors:
       create:
-        success: 'Professor(a) registrado com sucesso!'
+        success: 'Professor(a) registrado(a) com sucesso!'
       update:
         success: 'Professor(a) atualizado(a) com sucesso!'
       destroy:
-        success: 'Professor(a) apagado com sucesso!'
+        success: 'Professor(a) apagado(a) com sucesso!'
 
     activerecord:
       models:
@@ -18,4 +18,5 @@
           bio: 'Descrição'
           code: 'Código'
           profile_picture: 'Foto de perfil'
-          intructor_id: Instrutor(a)
+          instructor: 'Instrutor(a)'
+          instructor_id: 'Instrutor(a)'

@@ -1,0 +1,15 @@
+<h1>Aula sobre: <%= @lesson.name %></h1>
+
+<dl>
+  <dt>Conteúdo:</dt>
+  <dd><%= @lesson.content %></dd>
+  <dt>Duração:</dt>
+  <dd><%= t('lesson.duration', count: @lesson.duration) %></dd>
+</dl>
+
+<br>
+<%= link_to 'Atualizar Aula', edit_course_lesson_path(@lesson) %>
+<br>
+<%= link_to 'Apagar Aula', course_lesson_path(@course, @lesson), method: :delete %>
+<br>
+<%= link_to 'Voltar', course_path(@lesson.course) %>

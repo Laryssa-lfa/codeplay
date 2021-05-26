@@ -6,11 +6,11 @@ describe 'Admin updates instructors' do
                                     bio: "Formada em Ciências da Computação e leciona há 9 anos.")
 
     visit instructor_path(instructor)
-    click_on 'Editar'
+    click_on 'Editar Professor(a)'
 
     fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 10 anos.'
     attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/Maria.png')
-    click_on 'Atualizar'
+    click_on 'Atualizar Professor(a)'
 
     expect(page).to have_text('Maria')
     expect(page).to have_text('maria@email.com')

@@ -5,14 +5,14 @@
   <dd><%= @instructor.email %></dd>
   <dt><%= Instructor.human_attribute_name(:bio) %></dt>
   <dd><%= @instructor.bio %></dd>
-  <dt><%= Instructor.human_attribute_name(:profile_picture) %></dt>
   <% if @instructor.profile_picture.attached? %>
-    <%= image_tag @instructor.profile_picture %>
+    <dt><%= Instructor.human_attribute_name(:profile_picture) %></dt>
+    <dd><%= image_tag @instructor.profile_picture %></dd>
   <% end %>
 </dl>
 
 <br>
-<%= link_to "Editar", edit_instructor_path(@instructor) %>
+<%= link_to "Editar Professor(a)", edit_instructor_path(@instructor) %>
 <br>
 <%= link_to "Apagar", @instructor, method: :delete %>
 <br>

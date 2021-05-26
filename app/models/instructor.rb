@@ -7,6 +7,6 @@ class Instructor < ApplicationRecord
     has_one_attached :profile_picture
 
     def display_name
-        "#{name} - #{email}"
+      "#{name} - #{email}"
     end
 end

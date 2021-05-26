@@ -14,13 +14,28 @@
   <dd><%= number_to_currency @course.price %></dd>
   <dt><%= Course.human_attribute_name(:enrollment_deadline) %></dt>
   <dd><%= I18n.localize @course.enrollment_deadline %></dd>
-  <dt>Instructor(a)</dt>
-  <dd><%= @course.instructor.name %></dd>
+  <dt><%= Course.human_attribute_name(:instructor) %></dt>
+  <dd><%= "#{@course.instructor.name} - #{@course.instructor.email}" %></dd>
 </dl>
 
+<div id="lessons">
+  <% if @course.lessons.empty? %>
+    <p>Não tem aulas cadastradas.</p>
+  <% else %>
+    <p>Aulas disponíveis:</p>
+  <% end %>
+  <% @course.lessons.each do |lesson| %>
+    <%= link_to lesson.name, course_lesson_path([@course, lesson]) %>
+    <%= t('lesson.duration', count: lesson.duration) %>
+    <br>
+  <% end %>
+</div>
+
 <br>
-<%= link_to 'Editar', edit_course_path(@course) %>
+<%= link_to 'Editar Curso', edit_course_path(@course) %>
 <br>
-<%= link_to 'Apagar', @course, method: :delete %>
+<%= link_to 'Apagar Curso', @course, method: :delete %>
+<br>
+<%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
 <br>
 <%= link_to 'Voltar', courses_path %>
