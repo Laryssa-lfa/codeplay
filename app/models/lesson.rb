@@ -3,4 +3,5 @@ class Lesson < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :name, :duration, :content, presence: true
+  validates :duration, numericality: { only_integer: true, greater_than: 0 }
 end

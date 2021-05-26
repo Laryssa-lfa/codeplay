@@ -1,17 +1,13 @@
 require 'rails_helper'
 
 describe Lesson do
+  it { should belong_to(:course) }
+  it { should validate_presence_of(:name).with_message('não pode ficar em branco') }
+  it { should validate_presence_of(:duration).with_message('não pode ficar em branco') }
+  it { should validate_presence_of(:content).with_message('não pode ficar em branco') }
+  it { should validate_numericality_of(:duration).only_integer.is_greater_than(0) }
+
   context 'validation' do
-    it 'attributes cannot be blank' do
-      lesson = Lesson.new
-
-      lesson.valid? 
-
-      expect(lesson.errors[:name]).to include('não pode ficar em branco')
-      expect(lesson.errors[:duration]).to include('não pode ficar em branco')
-      expect(lesson.errors[:content]).to include('não pode ficar em branco')
-    end
-
     it 'code must be uniq' do
       instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
       course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
