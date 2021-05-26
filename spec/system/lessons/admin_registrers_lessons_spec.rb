@@ -25,18 +25,13 @@ describe 'Admin registrers lessons' do
     course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
-    Lesson.create!(name: 'Classes e Objetos', duration: 10,
-                   content: 'Uma aula de ruby', course: course)
     
     visit course_path(course)
-    click_on 'Classes e Objetos'
-    click_on 'Atualizar Aula'
-    fill_in 'Duração', with: '30'
-    click_on 'Atualizar'
+    click_on 'Registrar uma aula'
+    click_on 'Criar Aula'
 
-    expect(page).to have_text('Classes e Objetos')
-    expect(page).to have_text('30 minutos')
-    expect(page).to have_text('Aula atualizada com sucesso')
-    expect(current_path).to eq(course_path(course))
+    expect(page).to have_text('Nome não pode ficar em branco')
+    expect(page).to have_text('Duração não pode ficar em branco')
+    expect(page).to have_text('Conteúdo não pode ficar em branco')
   end
 end

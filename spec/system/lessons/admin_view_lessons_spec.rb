@@ -46,14 +46,15 @@ describe 'Admin view lessons' do
                             content: 'Uma aula de ruby', course: course)
 
     visit course_path(course)
-    click_on 'Classes e Objetos'
+    click_on lesson.name
 
-    expect(page).to have_text('Classes e Objetos')
-    expect(page).to have_text('Uma aula de ruby')
-    expect(page).to have_text('10 minutos')
+    expect(page).to have_text(lesson.name)
+    expect(page).to have_text(lesson.content)
+    expect(page).to have_text("#{lesson.duration} minutos")
     expect(page).to have_link('Atualizar Aula',
                               href: edit_course_lesson_path(course, lesson))
-    expect(page).to have_link('Apagar Aula')
-    expect(page).to have_link('Voltar')
+    expect(page).to have_link('Apagar Aula',
+                              href: course_lesson_path(course, lesson))
+    expect(page).to have_link('Voltar', href: course_path(course))
   end
 end

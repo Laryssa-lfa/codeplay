@@ -25,7 +25,7 @@
     <p>Aulas disponíveis:</p>
   <% end %>
   <% @course.lessons.each do |lesson| %>
-    <%= link_to lesson.name, course_lesson_path([@course, lesson]) %>
+    <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
     <%= t('lesson.duration', count: lesson.duration) %>
     <br>
   <% end %>

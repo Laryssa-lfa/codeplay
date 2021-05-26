@@ -2,6 +2,16 @@ require 'rails_helper'
 
 describe Lesson do
   context 'validation' do
+    it 'attributes cannot be blank' do
+      lesson = Lesson.new
+
+      lesson.valid? 
+
+      expect(lesson.errors[:name]).to include('não pode ficar em branco')
+      expect(lesson.errors[:duration]).to include('não pode ficar em branco')
+      expect(lesson.errors[:content]).to include('não pode ficar em branco')
+    end
+
     it 'code must be uniq' do
       instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
       course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
