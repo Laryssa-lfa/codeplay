@@ -11,6 +11,17 @@
   </head>
 
   <body>
+    <nav>
+      <% if user_signed_in? %>
+        <%= current_user.email %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+        <a href="<%= root_path %>" class="" data-method="delete">Inicio</a>
+      <% else %>
+        <%= link_to 'Registrar-me', new_user_registration_path %>
+        <%= link_to 'Entrar', new_user_session_path %>
+      <% end %>
+    </nav>
+
     <% if notice %>
       <div>
         <%= notice %>

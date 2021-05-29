@@ -1,0 +1,44 @@
+---
+  pt-BR:
+    activerecord:
+      models:
+        user:
+          one: 'Usuário(a)'
+          other: 'Usuários(as)'
+      attributes:
+        user:
+          password: 'Senha'
+          password_confirmation: 'Confirmação de Senha'
+
+    devise:
+      confirmations:
+        new:
+          submit: 'Reenviar instruções de confirmação'
+
+      passwords:
+        new:
+          submit: 'Enviar instruções de redefinição de senha'
+        edit:
+          submit: 'Mudar minha senha'
+          password: 'Senha'
+          password_confirmation: 'Confirmação de Senha'
+
+      registrations:
+        new:
+          submit: 'Criar conta'
+          password: 'Senha'
+          password_confirmation: 'Confirmação de Senha'
+        edit:
+          submit: 'Atualizar'
+          password: 'Senha'
+          password_confirmation: 'Confirmação de Senha'
+
+      sessions:
+        new:
+          submit: 'Entrar'
+          password: 'Senha'
+          remember_me: 'Lembre de mim'
+
+      unlocks:
+        new:
+          submit: 'Reenviar instruções de desbloqueio'
