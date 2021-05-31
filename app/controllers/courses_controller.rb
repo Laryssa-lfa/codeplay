@@ -1,8 +1,9 @@
 class CoursesController < ApplicationController
-    before_action :set_course, only: %i[show edit update destroy]
+    before_action :set_course, only: %i[show edit update destroy enroll]
 
     def index
-        @courses = Course.all
+        #@courses = Course.all
+        @courses = Course.where(enrollment_deadline: Date.current..)
     end
 
     def show
@@ -36,6 +37,15 @@ class CoursesController < ApplicationController
         @course.destroy
         redirect_to courses_path, notice: t('.success')
     end
+
+    def enroll
+        current_user.enrollments.create(course: @course, price: @course.price)
+        redirect_to my_courses_courses_path, notice: t('.success')
+      end
+    
+      def my_courses
+        @enrollments = current_user.enrollments
+      end
 
     private
 

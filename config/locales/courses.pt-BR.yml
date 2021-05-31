@@ -9,6 +9,8 @@
         success: 'Curso atualizado com sucesso'
       destroy:
         success: 'Curso apagado com sucesso'
+      enroll:
+        success: 'Curso comprado com sucesso'
 
     activerecord:
       models:

@@ -73,7 +73,17 @@ describe 'Account Management' do
     end
 
     it 'without valid field' do
-      
+      User.create!(email: 'jane@email.com', password: '123456')
+
+      visit root_path
+      click_on 'Entrar'
+      fill_in 'Senha', with: '123456'
+      within 'form' do
+        click_on 'Entrar'
+      end
+
+      expect(page).to have_text('Email ou senha inválida.')
+      expect(current_path).to eq(user_session_path)
     end
   end
 

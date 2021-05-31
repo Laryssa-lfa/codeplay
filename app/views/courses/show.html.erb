@@ -18,20 +18,31 @@
   <dd><%= "#{@course.instructor.name} - #{@course.instructor.email}" %></dd>
 </dl>
 
-<div id="lessons">
-  <% if @course.lessons.empty? %>
-    <p>Não tem aulas cadastradas.</p>
-  <% else %>
-    <p>Aulas disponíveis:</p>
+<% if user_signed_in? %>
+  <% if current_user.courses.exclude?(@course) %>
+    <%= link_to 'Comprar', enroll_course_path, method: :post %>
   <% end %>
-  <% @course.lessons.each do |lesson| %>
-    <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
-    <%= t('lesson.duration', count: lesson.duration) %>
-    <br>
+
+  <% if current_user.courses.include?(@course) %>
+    <div id="lessons">
+      <% if @course.lessons.empty? %>
+        <p>Não tem aulas cadastradas.</p>
+      <% else %>
+        <p>Aulas disponíveis:</p>
+      <% end %>
+      <% @course.lessons.each do |lesson| %>
+        <%= link_to lesson.name, course_lesson_path(@course, lesson) %>
+        <%= t('lesson.duration', count: lesson.duration) %>
+        <br>
+      <% end %>
+    </div>
   <% end %>
-</div>
+<% else %>
+  <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+<% end %>
 
 <br>
+<%#= mostrar apenas para admin %>
 <%= link_to 'Editar Curso', edit_course_path(@course) %>
 <br>
 <%= link_to 'Apagar Curso', @course, method: :delete %>
