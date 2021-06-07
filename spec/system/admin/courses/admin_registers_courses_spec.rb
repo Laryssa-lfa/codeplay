@@ -56,4 +56,10 @@ describe 'Admin registers courses' do
 
     expect(page).to have_content('já está em uso')
   end
+
+  it 'must be looged in to create course' do
+    visit new_admin_course_path
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end

@@ -29,4 +29,16 @@ describe 'admin updates courses' do
     expect(page).to have_text('Curso atualizado com sucesso')
     expect(page).to have_text('Maria - maria@email.com')
   end
+
+  it 'must be looged in to update course' do
+    instructor = Instructor.create!(name: 'José', email: 'jose@email.com',
+                                    bio: "Formado em Sistema de Informação e leciona há 7 anos.")
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033', instructor: instructor)
+
+    visit edit_admin_course_path(course)
+
+    expect(current_path).to eq(new_user_session_path)
+  end
 end

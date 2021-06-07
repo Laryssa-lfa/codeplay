@@ -101,14 +101,15 @@ describe 'Admin view courses' do
     expect(current_path).to eq(new_user_session_path)
   end
 
-  # it 'must be logged in to view courses detail through route' do
-  #  instructor = Instructor.create!(name: 'Fulano Sicrano', email: 'fulano@codeplay.com.br')
-  #  course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-  #                          code: 'RUBYBASIC', price: 10,
-  #                          enrollment_deadline: '22/12/2033', instructor: instructor)
+  it 'must be logged in to view courses detail through route' do
+    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
+                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033', instructor: instructor)
 
-  #  visit admin_course_path(course)
+    visit admin_course_path(course)
 
-  #  expect(current_path).to eq(new_user_session_path)
-  # end
+    expect(current_path).to eq(new_user_session_path)
+   end
 end
