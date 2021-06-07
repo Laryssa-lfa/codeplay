@@ -8,9 +8,4 @@
 </dl>
 
 <br>
-<%#= mostrar apenas para admin %>
-<%= link_to 'Atualizar Aula', edit_course_lesson_path(@course, @lesson) %>
-<br>
-<%= link_to 'Apagar Aula', course_lesson_path(@course, @lesson), method: :delete %>
-<br>
-<%= link_to 'Voltar', course_path(@lesson.course) %>
+<%= link_to 'Voltar', @lesson.course %>

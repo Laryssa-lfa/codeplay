@@ -1,18 +1,11 @@
 require 'rails_helper'
 
 describe 'Admin registers courses' do
-  it 'from index page' do
-    visit root_path
-    click_on 'Cursos'
-
-    expect(page).to have_link('Registrar um Curso',
-                              href: new_course_path)
-  end
-
   it 'successfully' do
     instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
                                     bio: "Formada em Ciências da Computação e leciona há 9 anos.")
 
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'
@@ -26,7 +19,6 @@ describe 'Admin registers courses' do
     attach_file 'Banner', Rails.root.join('spec/fixtures/banner.png')
     click_on 'Criar Curso'
 
-    expect(current_path).to eq(course_path(Course.last))
     expect(page).to have_content('Ruby on Rails')
     expect(page).to have_content('Um curso de Ruby on Rails')
     expect(page).to have_content('RUBYONRAILS')
@@ -38,6 +30,7 @@ describe 'Admin registers courses' do
   end
 
   it 'and attributes cannot be blank' do
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'
@@ -54,6 +47,7 @@ describe 'Admin registers courses' do
                    code: 'RUBYBASIC', price: 10,
                    enrollment_deadline: '22/12/2033', instructor: instructor)
 
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'

@@ -1,34 +1,9 @@
-class LessonsController < ApplicationController
-  before_action :set_lesson, only: %i[show edit update destroy]
-  before_action :set_course
+class Admin::LessonsController < Admin::AdminController
+  before_action :authenticate_user!, only: %i[show]
+  before_action :set_lesson, only: %i[show]
+  before_action :user_has_enrollment, only: %i[show]
 
   def show
-  end
-
-  def new
-    @lesson = Lesson.new
-  end
-
-  def create
-    @lesson = @course.lessons.new(lesson_params)
-    if @lesson.save
-      redirect_to @course, notice: t('.success')
-    else
-      render :new
-    end
-  end
-
-  def edit
-  end
-
-  def update
-    @lesson.update(lesson_params)
-    redirect_to @course, notice: t('.success')
-  end
-
-  def destroy
-    @lesson.destroy
-    redirect_to course_path(params[:course_id]), notice: t('.success')
   end
 
   private
@@ -41,7 +16,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
   end
 
-  def set_course
-    @course = Course.find(params[:course_id])
+  def user_has_enrollment
+    redirect_to @lesson.course unless current_student.courses.include?(@lesson.course)
   end
 end

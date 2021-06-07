@@ -1,5 +1,15 @@
 class HomeController < ApplicationController
-    def index
-        @courses = Course.where(enrollment_deadline: Date.current..)
-    end
+  layout :verify_layout
+
+  def index
+    @courses = Course.available.min_to_max
+  end
+
+  private
+
+  def verify_layout
+    return 'admin' if user_signed_in?
+
+    'application'
+  end
 end

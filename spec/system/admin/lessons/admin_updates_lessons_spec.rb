@@ -10,7 +10,8 @@ describe 'admin updates lesson' do
     lesson = Lesson.create!(name: 'Classes e Objetos', duration: 10,
                             content: 'Uma aula de ruby', course: course)
 
-    visit course_lesson_path(course, lesson)
+    user_login
+    visit admin_course_lesson_path(course, lesson)
     click_on 'Atualizar Aula'
     fill_in 'Nome', with: 'Classes e Objetos'
     fill_in 'Duração', with: '20'

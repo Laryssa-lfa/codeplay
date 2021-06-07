@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Account Management' do
   context 'registration' do
-    it 'with email and password' do
+    xit 'with email and password' do
       visit root_path
       click_on 'Registrar-me'
       fill_in 'Email', with: 'jane@email.com'
@@ -17,7 +17,7 @@ describe 'Account Management' do
       expect(page).to have_link('Sair')
     end
 
-    it 'without valid field' do
+    xit 'without valid field' do
       visit root_path
       click_on 'Registrar-me'
       click_on 'Criar conta'
@@ -26,7 +26,7 @@ describe 'Account Management' do
       expect(page).to have_link('Entrar')
     end
 
-    it 'password not match confirmation' do
+    xit 'password not match confirmation' do
       visit root_path
       click_on 'Registrar-me'
       fill_in 'Email', with: 'jane@email.com'
@@ -38,7 +38,7 @@ describe 'Account Management' do
       expect(page).to have_link('Entrar')
     end
 
-    it 'with email not unique' do
+    xit 'with email not unique' do
       User.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
@@ -53,7 +53,7 @@ describe 'Account Management' do
   end
 
   context 'sign in' do
-    it 'with email and password' do
+    xit 'with email and password' do
       User.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
@@ -72,7 +72,7 @@ describe 'Account Management' do
       expect(page).to have_link('Sair')
     end
 
-    it 'without valid field' do
+    xit 'without valid field' do
       User.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
@@ -88,7 +88,7 @@ describe 'Account Management' do
   end
 
   context 'logout' do
-    it 'successfully' do
+    xit 'successfully' do
       user = User.create!(email: 'jane@email.com', password: '123456')
 
       login_as user, scope: :user

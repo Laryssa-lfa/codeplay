@@ -1,0 +1,37 @@
+<% if course.errors.any? %>
+  <div id = "error_explanation">
+    <ul>
+      <% course.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: [:admin, course] do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+  <br>
+  <%= form.label :code %>
+  <%= form.text_field :code %>
+  <br>
+  <%= form.label :price %>
+  <%= form.text_field :price %>
+  <br>
+  <%= form.label :enrollment_deadline %>
+  <%= form.date_field :enrollment_deadline %>
+  <br>
+  <%= form.label :instructor_id %>
+  <%= form.collection_select :instructor_id, instructors, :id, :display_name %>
+  <br>
+  <%= form.label :banner %>
+  <%= form.file_field :banner %>
+  <br>
+  <%= form.submit %>
+<% end %>
+
+<br>
+<%= link_to "Voltar", admin_courses_path %>

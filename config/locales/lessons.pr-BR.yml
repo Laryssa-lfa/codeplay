@@ -1,12 +1,13 @@
 ---
   pt-BR:
-    lessons:
-      create:
-        success: 'Aula cadastrada com sucesso'
-      update:
-        success: 'Aula atualizada com sucesso'
-      destroy:
-        success: 'Aula apagada com sucesso'
+    admin:
+      lessons:
+        create:
+          success: 'Aula cadastrada com sucesso'
+        update:
+          success: 'Aula atualizada com sucesso'
+        destroy:
+          success: 'Aula apagada com sucesso'
 
     lesson:
       duration:

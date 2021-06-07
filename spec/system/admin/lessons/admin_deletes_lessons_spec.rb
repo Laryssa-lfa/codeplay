@@ -12,11 +12,12 @@ describe 'Admin deletes lesson' do
     lesson = Lesson.create!(name: 'Monkey Patch', duration: 1,
                             content: 'Uma aula sobre Monkey Patch', course: course)
     
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
     click_on lesson.name
     expect { click_on 'Apagar Aula' }.to change { Lesson.count }.by(-1)
 
     expect(page).to have_text('Aula apagada com sucesso')
-    expect(current_path).to eq(course_path(course))
+    expect(current_path).to eq(admin_course_path(course))
   end
 end

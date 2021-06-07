@@ -1,14 +1,17 @@
 ---
   pt-BR:
+    admin:
+      courses:
+        new:
+          title: 'Registrar um curso'
+        create:
+          success: 'Curso criado com sucesso'
+        update:
+          success: 'Curso atualizado com sucesso'
+        destroy:
+          success: 'Curso apagado com sucesso'
+
     courses:
-      new:
-        title: 'Registrar um curso'
-      create:
-        success: 'Curso criado com sucesso'
-      update:
-        success: 'Curso atualizado com sucesso'
-      destroy:
-        success: 'Curso apagado com sucesso'
       enroll:
         success: 'Curso comprado com sucesso'
 

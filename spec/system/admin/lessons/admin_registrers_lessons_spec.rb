@@ -7,7 +7,8 @@ describe 'Admin registrers lessons' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
     
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
     click_on 'Registrar uma aula'
     fill_in 'Nome', with: 'Duck Typing'
     fill_in 'Duração', with: '10'
@@ -17,7 +18,7 @@ describe 'Admin registrers lessons' do
     expect(page).to have_text('Duck Typing')
     expect(page).to have_text('10 minutos')
     expect(page).to have_text('Aula cadastrada com sucesso')
-    expect(current_path).to eq(course_path(course))
+    expect(current_path).to eq(admin_course_path(course))
   end
 
   it 'and fill and fields' do
@@ -26,7 +27,8 @@ describe 'Admin registrers lessons' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
     
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
     click_on 'Registrar uma aula'
     click_on 'Criar Aula'
 

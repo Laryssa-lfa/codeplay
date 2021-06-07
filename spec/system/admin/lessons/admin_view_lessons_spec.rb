@@ -16,7 +16,8 @@ describe 'Admin view lessons' do
     Lesson.create!(name: 'Aula para não ver', duration: 40,
                    content: 'Uma aula sobre Monkey Patch', course: other_course)
 
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
 
     expect(page).to have_link('Classes e Objetos')
     expect(page).to have_text('10 minutos')
@@ -32,7 +33,8 @@ describe 'Admin view lessons' do
                             code: 'RUBYBASIC', price: 10,
                             enrollment_deadline: '22/12/2033', instructor: instructor)
 
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
 
     expect(page).to have_text('Não tem aulas cadastradas.')
   end
@@ -45,16 +47,30 @@ describe 'Admin view lessons' do
     lesson = Lesson.create!(name: 'Classes e Objetos', duration: 10,
                             content: 'Uma aula de ruby', course: course)
 
-    visit course_path(course)
+    user_login
+    visit admin_course_path(course)
     click_on lesson.name
 
     expect(page).to have_text(lesson.name)
     expect(page).to have_text(lesson.content)
     expect(page).to have_text("#{lesson.duration} minutos")
-    expect(page).to have_link('Atualizar Aula',
-                              href: edit_course_lesson_path(course, lesson))
-    expect(page).to have_link('Apagar Aula',
-                              href: course_lesson_path(course, lesson))
-    expect(page).to have_link('Voltar', href: course_path(course))
+    expect(page).to have_link('Atualizar Aula')
+    expect(page).to have_link('Apagar Aula')
+    expect(page).to have_link('Voltar', href: admin_course_path(course))
+  end
+
+  it 'must be logged in to access through route' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
+    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                            code: 'RUBYBASIC', price: 10,
+                            enrollment_deadline: '22/12/2033',
+                            instructor: instructor)
+    lesson = Lesson.create!(name: 'Classes e Objetos', duration: 10,
+                            content: 'Uma aula de Ruby', course: course)
+
+    visit admin_course_lesson_path(course, lesson)
+
+    expect(current_path).to eq(new_user_session_path)
   end
 end

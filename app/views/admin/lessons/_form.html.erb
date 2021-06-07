@@ -8,7 +8,7 @@
   </div>
 <% end %>
 
-<%= form_with model: [course, lesson] do |l| %>
+<%= form_with model: [:admin, course, lesson] do |l| %>
   <%= l.label :name %>
   <%= l.text_field :name %>
   <br>
@@ -22,4 +22,4 @@
 <% end %>
 
 <br>
-<%= link_to 'Voltar', course_path(course) %>
+<%= link_to 'Voltar', [:admin, course] %>

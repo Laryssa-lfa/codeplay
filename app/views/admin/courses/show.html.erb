@@ -25,19 +25,17 @@
     <p>Aulas disponíveis:</p>
   <% end %>
   <% @course.lessons.each do |lesson| %>
-    <p><%= link_to_if current_user&.courses&.include?(@course), lesson.name, [@course, lesson] do %></p>
-      <p><%= lesson.name%></p>
-    <% end %>
+    <p><%= link_to lesson.name, [:admin, @course, lesson] %></p>
     <p><%= t('lesson.duration', count: lesson.duration) %></p>
     <br>
   <% end %>
 </div>
 
-<% if current_user&.courses&.exclude?(@course) %>
-  <%= link_to 'Comprar', enroll_course_path, method: :post %>
-<% else %>
-  <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
-<% end %>
-
 <br>
-<%= link_to 'Voltar', root_path %>
+<%= link_to 'Editar Curso', edit_admin_course_path(@course) %>
+<br>
+<%= link_to 'Apagar Curso', [:admin, @course], method: :delete %>
+<br>
+<%= link_to 'Registrar uma aula', new_admin_course_lesson_path(@course) %>
+<br>
+<%= link_to 'Voltar', admin_courses_path %>

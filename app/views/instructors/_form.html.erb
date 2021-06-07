@@ -1,27 +1,27 @@
-<% if @instructor.errors.any? %>
+<% if instructor.errors.any? %>
     <div id = "error_explanation">
       <ul>
-        <% @instructor.errors.full_messages.each do |error| %>
+        <% instructor.errors.full_messages.each do |error| %>
           <li><%= error %></li>
         <% end %>
       </ul>
     </div>
 <% end %>
 
-<%= form_with model: @instructor do |i| %>
-  <%= i.label :name %>
-  <%= i.text_field :name %>
+<%= form_with model: instructor do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
   <br>
-  <%= i.label :email %>
-  <%= i.email_field :email %>
+  <%= form.label :email %>
+  <%= form.email_field :email %>
   <br>
-  <%= i.label :bio %>
-  <%= i.text_area :bio %>
+  <%= form.label :bio %>
+  <%= form.text_area :bio %>
   <br>
-  <%= i.label :profile_picture %>
-  <%= i.file_field :profile_picture %>
+  <%= form.label :profile_picture %>
+  <%= form.file_field :profile_picture %>
   <br>
-  <%= i.submit %>
+  <%= form.submit %>
 <% end %>
 
 <br>

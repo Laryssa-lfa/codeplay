@@ -9,8 +9,9 @@ describe 'admin updates courses' do
                             enrollment_deadline: '22/12/2033', instructor: instructor)
     Instructor.create!(name: 'José', email: 'jose@email.com',
                        bio: "Formado em Sistema de Informação e leciona há 7 anos.")
-
-    visit course_path(course)
+                       
+    user_login
+    visit admin_course_path(course)
     click_on 'Editar Curso'
     fill_in 'Nome', with: 'Ruby on Rails'
     fill_in 'Descrição', with: 'Um curso de RoR'
