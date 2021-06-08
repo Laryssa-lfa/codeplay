@@ -1,4 +1,5 @@
-class Api::V1::CoursesController < ActionController::API
+class Api::V1::CoursesController < Api::V1::ApiController
+
   def index
     @courses = Course.all
     render json: @courses
@@ -7,26 +8,25 @@ class Api::V1::CoursesController < ActionController::API
   def show
     @course = Course.find_by!(code: params[:code])
     render json: @course
-    
-  rescue ActiveRecord::RecordNotFound
-      head 404
   end
 
   def create
     @course = Course.new(course_params)
     @course.save!
     render json: @course, status: :created
+  rescue ActionController::ParameterMissing
+    render status: :precondition_failed, json: { errors: 'parâmetros inválidos' }
   end
 
   def update
     @course = Course.find_by!(code: params[:code])
-    @course.update(course_params)
+    @course.update!(course_params)
     render json: @course, status: 200
   end
 
   def destroy
     @course = Course.find_by!(code: params[:code])
-    @course.destroy
+    @course.destroy!
     render json: @course, status: 200
   end
 

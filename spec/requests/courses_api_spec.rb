@@ -76,6 +76,41 @@ describe 'Courses API' do
       expect(parsed_body['code']).to eq('RUBYONRAILS')
       expect(parsed_body['price']).to eq('10.0')
     end
+
+    it 'should not creat a course with invalid params' do
+      post '/api/v1/courses', params: { course: { number: 10 } }
+
+      expect(response).to have_http_status(422)
+      expect(response.content_type).to include('application/json')
+      expect(parsed_body['name']).to eq(['não pode ficar em branco'])
+      expect(parsed_body['code']).to include('não pode ficar em branco')
+      expect(parsed_body['price']).to eq(['não pode ficar em branco'])
+      expect(parsed_body['instructor']).to eq(['é obrigatório(a)'])
+    end
+
+    it 'code must be unique' do
+      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
+      course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                              code: 'RUBYBASIC', price: 10,
+                              enrollment_deadline: '22/12/2033', instructor: instructor)
+
+      post '/api/v1/courses', params: {
+        course: { name: 'Ruby on Rails', code: 'RUBYBASIC', price: 10,
+                  instructor_id: instructor.id }
+      }
+
+      expect(response).to have_http_status(422)
+      expect(response.content_type).to include('application/json')
+      expect(parsed_body['code']).to eq(['já está em uso'])
+    end
+
+    it 'should not creat a course with invalid parameters' do
+      post '/api/v1/courses'
+
+      expect(response).to have_http_status(412)
+      expect(response.content_type).to include('application/json')
+      expect(response.body).to include('parâmetros inválidos')
+    end
   end
 
   context 'PATCH /api/v1/courses' do
@@ -105,7 +140,6 @@ describe 'Courses API' do
       delete "/api/v1/courses/#{course.code}"
 
       expect(response).to have_http_status(200)
-
     end
   end
 
