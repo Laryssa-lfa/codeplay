@@ -29,7 +29,7 @@ describe 'Student view courses on homepage' do
                                       code: 'RUBYBASIC', price: 10,
                                       enrollment_deadline: 1.month.from_now, instructor: instructor)
 
-    login_as Student, scope: :Student
+    student_login
     visit root_path
     click_on 'Ruby'
 
@@ -47,7 +47,7 @@ describe 'Student view courses on homepage' do
                                         code: 'HTMLBASIC', price: 12,
                                         enrollment_deadline: 1.day.ago, instructor: instructor)
 
-    login_as user, scope: :user
+    student_login
     visit courses_path
 
     expect(page).not_to have_link 'HTML'
@@ -60,6 +60,7 @@ describe 'Student view courses on homepage' do
                                       code: 'RUBYBASIC', price: 10,
                                       enrollment_deadline: 1.month.from_now, instructor: instructor)
 
+    student_login
     visit root_path
     click_on 'Ruby'
 
@@ -79,7 +80,7 @@ describe 'Student view courses on homepage' do
                                   code: 'ELIXIRBASIC', price: 20,
                                   enrollment_deadline: 1.month.from_now, instructor: instructor)
 
-    login_as user, scope: :user
+    student_login
     visit root_path
     click_on 'Ruby'
     click_on 'Comprar'
@@ -93,7 +94,7 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and cannot buy a course twice' do
-    user = User.create!(email: 'jane@test.com.br', password: '123456')
+    student_login
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -103,7 +104,6 @@ describe 'Student view courses on homepage' do
                    content: 'Uma aula legal')
     Enrollment.create!(user: user, course: available_course)
 
-    login_as user, scope: :user
     visit root_path
     click_on 'Ruby'
 
