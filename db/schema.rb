@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_000839) do
+ActiveRecord::Schema.define(version: 2021_07_07_022348) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,14 +54,12 @@ ActiveRecord::Schema.define(version: 2021_06_08_000839) do
 
   create_table "enrollments", force: :cascade do |t|
     t.integer "course_id", null: false
-    t.integer "user_id", null: false
     t.decimal "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id", null: false
     t.index ["course_id"], name: "index_enrollments_on_course_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
-    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -111,6 +109,5 @@ ActiveRecord::Schema.define(version: 2021_06_08_000839) do
   add_foreign_key "courses", "instructors"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "students"
-  add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "courses"
 end

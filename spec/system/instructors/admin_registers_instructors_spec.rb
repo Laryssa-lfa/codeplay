@@ -2,35 +2,32 @@ require 'rails_helper'
 
 describe 'Admin registers instructors' do
   it 'from index page' do
-    visit root_path
-    click_on 'Professores'
+    visit instructors_path
 
     expect(page).to have_link('Registrar professor(a)',
                               href: new_instructor_path)
   end
 
   it 'successfully' do
-    visit root_path
-    click_on 'Professores'
+    visit instructors_path
     click_on 'Registrar professor(a)'
     
     fill_in 'Nome', with: 'Maria'
     fill_in 'E-mail', with: 'maria@email.com'
-    fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 9 anos.'
+    fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 9 anos'
     attach_file 'Foto de perfil', Rails.root.join('spec/fixtures/Maria.png')
     click_on 'Criar Professor(a)'
 
     expect(page).to have_content('Professor(a) registrado(a) com sucesso!')
     expect(page).to have_content('Maria')
     expect(page).to have_content('maria@email.com')
-    expect(page).to have_content('Formada em Ciências da Computação e leciona há 9 anos.')
+    expect(page).to have_content('Formada em Ciências da Computação e leciona há 9 anos')
     expect(page).to have_css('img[src*="Maria.png"]')
     expect(page).to have_link('Voltar')
   end
 
   it 'and attributes cannot be blank' do
-    visit root_path
-    click_on 'Professores'
+    visit instructors_path
     click_on 'Registrar professor(a)'
     
     fill_in 'Nome', with: ''
@@ -43,10 +40,9 @@ describe 'Admin registers instructors' do
 
   it 'and e-mail must be unique' do
     Instructor.create!(name: 'José', email: 'jose@email.com',
-                       bio: "Formado em Sistema de Informação e leciona há 7 anos.")
+                       bio: 'Formado em Sistema de Informação e leciona há 7 anos')
 
-    visit root_path
-    click_on 'Professores'
+    visit instructors_path
     click_on 'Registrar professor(a)'
     fill_in 'E-mail', with: 'jose@email.com'
     click_on 'Criar Professor(a)'

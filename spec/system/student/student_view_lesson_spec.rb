@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Student view lesson' do
   it 'successfully' do
+    student = student_login
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -11,7 +12,6 @@ describe 'Student view lesson' do
                    content: 'Uma aula legal')
     Enrollment.create!(student: student, course: available_course)
     
-    student_login
     visit root_path
     click_on 'Ruby'
            

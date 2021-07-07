@@ -22,12 +22,11 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and view enrollment link' do
-    Student = Student.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
-    available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                                      code: 'RUBYBASIC', price: 10,
-                                      enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                   code: 'RUBYBASIC', price: 10,
+                   enrollment_deadline: 1.month.from_now, instructor: instructor)
 
     student_login
     visit root_path
@@ -37,48 +36,50 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and does not view enrollment if deadline is over' do
-    user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
-    available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                                      code: 'RUBYBASIC', price: 10,
-                                      enrollment_deadline: 1.month.from_now, instructor: instructor)
-    unavailable_course = Course.create!(name: 'HTML', description: 'Um curso de HTML',
-                                        code: 'HTMLBASIC', price: 12,
-                                        enrollment_deadline: 1.day.ago, instructor: instructor)
+    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                   code: 'RUBYBASIC', price: 10,
+                   enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Course.create!(name: 'HTML', description: 'Um curso de HTML',
+                     code: 'HTMLBASIC', price: 12,
+                     enrollment_deadline: 1.day.ago, instructor: instructor)
 
     student_login
-    visit courses_path
+    visit root_path
 
     expect(page).not_to have_link 'HTML'
+    expect(page).not_to have_content 'Um curso de HTML'
+    expect(page).not_to have_content 'R$ 12,00'
+    expect(page).to have_link 'Ruby'
+    expect(page).to have_content 'Um curso de Ruby'
+    expect(page).to have_content 'R$ 10,00'
   end
 
   it 'must be signed in to enroll' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
-    available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                                      code: 'RUBYBASIC', price: 10,
-                                      enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                   code: 'RUBYBASIC', price: 10,
+                   enrollment_deadline: 1.month.from_now, instructor: instructor)
 
-    student_login
     visit root_path
     click_on 'Ruby'
 
     expect(page).not_to have_link 'Comprar'
     expect(page).to have_content 'Faça login para comprar este curso'
-    expect(page).to have_link 'login', href: new_user_session_path
+    expect(page).to have_link 'login', href: new_student_session_path
   end
 
   it 'and buy a course' do
-    user = User.create!(email: 'jane@test.com.br', password: '123456')
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
-    available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                                      code: 'RUBYBASIC', price: 10,
-                                      enrollment_deadline: 1.month.from_now, instructor: instructor)
-    other_course = Course.create!(name: 'Elixir', description: 'Um curso de programação funcional',
-                                  code: 'ELIXIRBASIC', price: 20,
-                                  enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
+                   code: 'RUBYBASIC', price: 10,
+                   enrollment_deadline: 1.month.from_now, instructor: instructor)
+    Course.create!(name: 'Elixir', description: 'Um curso de programação funcional',
+                   code: 'ELIXIRBASIC', price: 20,
+                   enrollment_deadline: 1.month.from_now, instructor: instructor)
 
     student_login
     visit root_path
@@ -94,7 +95,7 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and cannot buy a course twice' do
-    student_login
+    student = student_login
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
     available_course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
@@ -102,7 +103,7 @@ describe 'Student view courses on homepage' do
                                       enrollment_deadline: 1.month.from_now, instructor: instructor)
     Lesson.create!(name: 'Monkey Patch', course: available_course, duration: 20,
                    content: 'Uma aula legal')
-    Enrollment.create!(user: user, course: available_course)
+    Enrollment.create!(student: student, course: available_course)
 
     visit root_path
     click_on 'Ruby'

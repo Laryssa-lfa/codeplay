@@ -36,7 +36,7 @@
 <% if current_student&.courses&.exclude?(@course) %>
   <%= link_to 'Comprar', enroll_course_path, method: :post %>
 <% else %>
-  <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+  <p>Faça <%= link_to 'login', new_student_session_path %> para comprar este curso</p>
 <% end %>
 
 <br>

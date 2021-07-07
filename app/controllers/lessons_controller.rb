@@ -1,7 +1,7 @@
-class Admin::LessonsController < Admin::AdminController
-  before_action :authenticate_user!, only: %i[show]
+class LessonsController < ApplicationController
+  before_action :authenticate_student!, only: %i[show]
   before_action :set_lesson, only: %i[show]
-  before_action :user_has_enrollment, only: %i[show]
+  before_action :student_has_enrollment, only: %i[show]
 
   def show
   end
@@ -16,7 +16,7 @@ class Admin::LessonsController < Admin::AdminController
     @lesson = Lesson.find(params[:id])
   end
 
-  def user_has_enrollment
+  def student_has_enrollment
     redirect_to @lesson.course unless current_student.courses.include?(@lesson.course)
   end
 end
