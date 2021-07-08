@@ -1,35 +1,32 @@
 require 'rails_helper'
 
-describe 'Account Management' do
+describe 'User Account Management' do
   context 'registration' do
-    xit 'with email and password' do
-      visit root_path
-      click_on 'Registrar-me'
-      fill_in 'Email', with: 'jane@email.com'
+    it 'with email and password' do
+      visit new_user_registration_path
+      fill_in 'Email', with: 'jane@codeplay.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de Senha', with: '123456'
       click_on 'Criar conta'
 
       expect(page).to have_text('Login efetuado com sucesso')
-      expect(page).to have_text('jane@email.com')
+      expect(page).to have_text('jane@codeplay.com')
       expect(current_path).to eq(root_path)
       expect(page).to_not have_link('Registrar-me')
       expect(page).to have_link('Sair')
     end
 
-    xit 'without valid field' do
-      visit root_path
-      click_on 'Registrar-me'
+    it 'without valid field' do
+      visit new_user_registration_path
       click_on 'Criar conta'
 
       expect(page).to have_text('não pode ficar em branco', count: 2)
       expect(page).to have_link('Entrar')
     end
 
-    xit 'password not match confirmation' do
-      visit root_path
-      click_on 'Registrar-me'
-      fill_in 'Email', with: 'jane@email.com'
+    it 'password not match confirmation' do
+      visit new_user_registration_path
+      fill_in 'Email', with: 'jane@codeplay.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de Senha', with: '123457'
       click_on 'Criar conta'
@@ -38,12 +35,11 @@ describe 'Account Management' do
       expect(page).to have_link('Entrar')
     end
 
-    xit 'with email not unique' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'with email not unique' do
+      User.create!(email: 'jane@codeplay.com', password: '123456')
 
-      visit root_path
-      click_on 'Registrar-me'
-      fill_in 'Email', with: 'jane@email.com'
+      visit new_user_registration_path
+      fill_in 'Email', with: 'jane@codeplay.com'
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de Senha', with: '123456'
       click_on 'Criar conta'
@@ -53,30 +49,28 @@ describe 'Account Management' do
   end
 
   context 'sign in' do
-    xit 'with email and password' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'with email and password' do
+      User.create!(email: 'jane@codeplay.com', password: '123456')
 
-      visit root_path
-      click_on 'Entrar'
-      fill_in 'Email', with: 'jane@email.com'
+      visit new_user_session_path
+      fill_in 'Email', with: 'jane@codeplay.com'
       fill_in 'Senha', with: '123456'
       within 'form' do
         click_on 'Entrar'
       end
 
       expect(page).to have_text('Login efetuado com sucesso')
-      expect(page).to have_text('jane@email.com')
+      expect(page).to have_text('jane@codeplay.com')
       expect(current_path).to eq(root_path)
       expect(page).to_not have_link('Registrar-me')
       expect(page).to_not have_link('Entrar')
       expect(page).to have_link('Sair')
     end
 
-    xit 'without valid field' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'without valid field' do
+      User.create!(email: 'jane@codeplay.com', password: '123456')
 
-      visit root_path
-      click_on 'Entrar'
+      visit new_user_session_path
       fill_in 'Senha', with: '123456'
       within 'form' do
         click_on 'Entrar'
@@ -88,15 +82,13 @@ describe 'Account Management' do
   end
 
   context 'logout' do
-    xit 'successfully' do
-      user = User.create!(email: 'jane@email.com', password: '123456')
-
-      login_as user, scope: :user
+    it 'successfully' do
+      user_login
       visit root_path
       click_on 'Sair'
 
       expect(page).to have_text('Saiu com sucesso')
-      expect(page).to_not have_text('jane@email.com')
+      expect(page).to_not have_text('jane@codeplay.com')
       expect(current_path).to eq(root_path)
       expect(page).to have_link('Registrar-me')
       expect(page).to have_link('Entrar')

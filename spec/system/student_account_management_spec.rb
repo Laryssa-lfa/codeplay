@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'Account Management' do
+describe 'Student Account Management' do
   context 'registration' do
-    xit 'with email and password' do
+    it 'with email and password' do
       visit root_path
       click_on 'Registrar-me'
       fill_in 'Email', with: 'jane@email.com'
@@ -17,7 +17,7 @@ describe 'Account Management' do
       expect(page).to have_link('Sair')
     end
 
-    xit 'without valid field' do
+    it 'without valid field' do
       visit root_path
       click_on 'Registrar-me'
       click_on 'Criar conta'
@@ -26,7 +26,7 @@ describe 'Account Management' do
       expect(page).to have_link('Entrar')
     end
 
-    xit 'password not match confirmation' do
+    it 'password not match confirmation' do
       visit root_path
       click_on 'Registrar-me'
       fill_in 'Email', with: 'jane@email.com'
@@ -38,14 +38,14 @@ describe 'Account Management' do
       expect(page).to have_link('Entrar')
     end
 
-    xit 'with email not unique' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'with email not unique' do
+      Student.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
       click_on 'Registrar-me'
       fill_in 'Email', with: 'jane@email.com'
-      fill_in 'Senha', with: '123456'
-      fill_in 'Confirmação de Senha', with: '123456'
+      fill_in 'Senha', with: '456123'
+      fill_in 'Confirmação de Senha', with: '456123'
       click_on 'Criar conta'
 
       expect(page).to have_text('Email já está em uso')
@@ -53,8 +53,8 @@ describe 'Account Management' do
   end
 
   context 'sign in' do
-    xit 'with email and password' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'with email and password' do
+      Student.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
       click_on 'Entrar'
@@ -72,8 +72,8 @@ describe 'Account Management' do
       expect(page).to have_link('Sair')
     end
 
-    xit 'without valid field' do
-      User.create!(email: 'jane@email.com', password: '123456')
+    it 'without valid field' do
+      Student.create!(email: 'jane@email.com', password: '123456')
 
       visit root_path
       click_on 'Entrar'
@@ -83,15 +83,13 @@ describe 'Account Management' do
       end
 
       expect(page).to have_text('Email ou senha inválida.')
-      expect(current_path).to eq(user_session_path)
+      expect(current_path).to eq(student_session_path)
     end
   end
 
   context 'logout' do
-    xit 'successfully' do
-      user = User.create!(email: 'jane@email.com', password: '123456')
-
-      login_as user, scope: :user
+    it 'successfully' do
+      student_login
       visit root_path
       click_on 'Sair'
 
