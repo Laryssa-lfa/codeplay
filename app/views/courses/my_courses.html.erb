@@ -1,4 +1,8 @@
-<h1>Meus Cursos</h1>
+<% if @enrollments.empty? %>
+  <h1>Nenhum Curso Comprado</h1>
+<% else %>
+  <h1>Meus Cursos</h1>
+<% end %>
 
 <% @enrollments.each do |enrollment| %>
   <h4><%= enrollment.course.name %></h4>

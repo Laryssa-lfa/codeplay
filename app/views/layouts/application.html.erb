@@ -16,6 +16,7 @@
         <%= current_student.email %>
         <%= link_to 'Sair', destroy_student_session_path, method: :delete %>
         <a href="<%= root_path %>" class="" data-method="get">Inicio</a>
+        <%= link_to 'Meus Cursos', my_courses_courses_path %>
       <% else %>
         <%= link_to 'Registrar-me', new_student_registration_path %>
         <%= link_to 'Entrar', new_student_session_path %>

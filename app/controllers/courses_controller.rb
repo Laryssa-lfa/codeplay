@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_student!, only: %i[my_courses]
   before_action :set_course, only: %i[show enroll]
 
   def show
@@ -17,10 +18,5 @@ class CoursesController < ApplicationController
 
   def set_course
     @course = Course.find(params[:id])
-  end
-
-  def course_params
-    params.require(:course).permit(:name, :description, :code, :price, :instructor_id,
-                                   :enrollment_deadline, :banner)
   end
 end

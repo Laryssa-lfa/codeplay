@@ -38,7 +38,6 @@ class Admin::CoursesController < Admin::AdminController
     end
 
     def my_courses
-     @enrollments = current_user.enrollments
     end
 
     private
