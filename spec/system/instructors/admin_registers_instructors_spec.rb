@@ -39,8 +39,7 @@ describe 'Admin registers instructors' do
   end
 
   it 'and e-mail must be unique' do
-    Instructor.create!(name: 'José', email: 'jose@email.com',
-                       bio: 'Formado em Sistema de Informação e leciona há 7 anos')
+    create(:instructor, email: 'jose@email.com')
 
     visit instructors_path
     click_on 'Registrar professor(a)'

@@ -3,15 +3,10 @@ require 'rails_helper'
 describe 'Courses API' do
   context 'GET /api/v1/courses' do
     it 'should get courses' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-      Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', instructor: instructor)
-      Course.create!(name: 'Ruby on Rails',
-                    description: 'Um curso de Ruby on Rails',
-                    code: 'RUBYONRAILS', price: 20,
-                    enrollment_deadline: '20/12/2033', instructor: instructor,
-                    banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
+      instructor = create(:instructor)
+      create(:course, name: 'Ruby', instructor: instructor)
+      create(:course, name: 'Ruby on Rails', instructor: instructor,
+             banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
 
       get '/api/v1/courses'
 
@@ -33,15 +28,10 @@ describe 'Courses API' do
 
   context 'GET /api/v1/courses/:code' do
     it 'should return a course' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-      course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10,
-                    enrollment_deadline: '22/12/2033', instructor: instructor)
-      Course.create!(name: 'Ruby on Rails',
-                    description: 'Um curso de Ruby on Rails',
-                    code: 'RUBYONRAILS', price: 20,
-                    enrollment_deadline: '20/12/2033', instructor: instructor,
-                    banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
+      instructor = create(:instructor)
+      create(:course, code: 'RUBYONRAILS', instructor: instructor)
+      course = create(:course, name: 'Ruby', description: 'Um curso de Ruby',
+                    code: 'RUBYBASIC', price: 10, instructor: instructor)
 
       get "/api/v1/courses/#{course.code}"
 
@@ -63,7 +53,7 @@ describe 'Courses API' do
 
   context 'POST /api/v1/courses' do
     it 'should creat a courses' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
+      instructor = create(:instructor)
 
       post '/api/v1/courses', params: {
         course: { name: 'Ruby on Rails', code: 'RUBYONRAILS', price: 10,
@@ -89,10 +79,8 @@ describe 'Courses API' do
     end
 
     it 'code must be unique' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-      course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                              code: 'RUBYBASIC', price: 10,
-                              enrollment_deadline: '22/12/2033', instructor: instructor)
+      instructor = create(:instructor)
+      course = create(:course, code: 'RUBYBASIC', instructor: instructor)
 
       post '/api/v1/courses', params: {
         course: { name: 'Ruby on Rails', code: 'RUBYBASIC', price: 10,
@@ -115,10 +103,8 @@ describe 'Courses API' do
 
   context 'PATCH /api/v1/courses' do
     it 'should update a courses' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-      course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                              code: 'RUBYBASIC', price: 10,
-                              enrollment_deadline: '22/12/2033', instructor: instructor)
+      instructor = create(:instructor)
+      course = create(:course, name: 'Ruby', code: 'RUBYBASIC', instructor: instructor)
 
       patch "/api/v1/courses/#{course.code}", params: { course: { price: 20 } }
 
@@ -132,10 +118,8 @@ describe 'Courses API' do
 
   context 'DELETE /api/v1/courses' do
     it 'should delete a courses' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-      course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                              code: 'RUBYBASIC', price: 10,
-                              enrollment_deadline: '22/12/2033', instructor: instructor)
+      instructor = create(:instructor)
+      course = create(:course, instructor: instructor)
 
       delete "/api/v1/courses/#{course.code}"
 

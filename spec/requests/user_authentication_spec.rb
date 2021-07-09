@@ -8,11 +8,8 @@ describe 'User authentication' do
   end
 
   it 'cannot access update without login' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                   code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033', instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
 
     patch admin_course_path(course), params: { course: { name: 'Ruby' } }
 
@@ -20,11 +17,8 @@ describe 'User authentication' do
   end
 
   it 'cannot delete without login' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                   code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033', instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
 
     delete admin_course_path(course)
 
@@ -32,12 +26,8 @@ describe 'User authentication' do
   end
 
   it 'cannot create lesson without login' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                            code: 'RUBYBASIC', price: 10,
-                            enrollment_deadline: '22/12/2033',
-                            instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
 
     post admin_course_lessons_path(course), params: { lesson: { name: 'Ruby' } }
 

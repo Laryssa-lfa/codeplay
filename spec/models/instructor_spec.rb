@@ -27,8 +27,7 @@ describe Instructor do
 
   context 'validation' do
     it 'email must be uniq' do
-      Instructor.create!(name: 'José', email: 'jose@email.com',
-                         bio: "Formado em Sistema de Informação e leciona há 7 anos.")
+      create(:instructor, email: 'jose@email.com')
       instructor = Instructor.new(email: 'jose@email.com')
 
       instructor.valid?

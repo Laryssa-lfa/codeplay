@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe 'Admin registers courses' do
   it 'successfully' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
+    instructor = create(:instructor)
 
     user_login
     visit root_path
@@ -41,11 +40,8 @@ describe 'Admin registers courses' do
   end
 
   it 'and code must be unique' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                    bio: "Formada em Ciências da Computação e leciona há 9 anos.")
-    Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                   code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033', instructor: instructor)
+    instructor = create(:instructor)
+    create(:course, code: 'RUBYBASIC', instructor: instructor)
 
     user_login
     visit root_path

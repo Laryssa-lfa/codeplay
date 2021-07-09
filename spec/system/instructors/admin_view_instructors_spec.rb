@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe 'Admin view instructor' do
   it 'successfully' do
-    Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                       bio: 'Formada em Ciências da Computação e leciona há 9 anos')
-    Instructor.create!(name: 'José', email: 'jose@email.com',
-                       bio: 'Formado em Sistema de Informação e leciona há 7 anos')
+    create(:instructor, name: 'Maria')
+    create(:instructor, name: 'José', email: 'jose@email.com')
 
     user_login
     visit root_path
@@ -16,10 +14,8 @@ describe 'Admin view instructor' do
   end
 
   it 'and view details' do
-    Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                       bio: 'Formada em Ciências da Computação e leciona há 9 anos',
-                       profile_picture: fixture_file_upload(Rails.root.join('spec/fixtures/Maria.png'))
-    )
+    create(:instructor,
+           profile_picture: fixture_file_upload(Rails.root.join('spec/fixtures/Maria.png')))
 
     user_login
     visit root_path
@@ -50,13 +46,12 @@ describe 'Admin view instructor' do
   end
 
   it 'and return to promotions page' do
-    Instructor.create!(name: 'José', email: 'jose@email.com',
-                       bio: 'Formado em Sistema de Informação e leciona há 7 anos')
+    create(:instructor)
 
     user_login
     visit root_path
     click_on 'Professores'
-    click_on 'José'
+    click_on 'Maria'
     click_on 'Voltar'
 
     expect(current_path).to eq instructors_path

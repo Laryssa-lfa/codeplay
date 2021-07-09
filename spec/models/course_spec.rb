@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe Course do
+  it { should have_many(:lessons) }
+  it { should have_many(:enrollments) }
+  it { should belong_to(:instructor) }
+
   context 'validation' do
     it 'attributes cannot be blank' do
       course = Course.new
@@ -13,11 +17,8 @@ describe Course do
     end
 
     it 'code must be uniq' do
-      instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com',
-                                      bio: "Formada em Ciências da Computação e leciona há 9 anos.")
-      Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                     code: 'RUBYBASIC', price: 10,
-                     enrollment_deadline: '22/12/2033', instructor: instructor)
+      instructor = create(:instructor)
+      create(:course, code: 'RUBYBASIC', instructor: instructor)
       course = Course.new(code: 'RUBYBASIC')
 
       course.valid?

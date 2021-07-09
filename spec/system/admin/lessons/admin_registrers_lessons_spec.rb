@@ -2,10 +2,8 @@ require 'rails_helper'
 
 describe 'Admin registrers lessons' do
   it 'successfully' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                            code: 'RUBYBASIC', price: 10,
-                            enrollment_deadline: '22/12/2033', instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
     
     user_login
     visit admin_course_path(course)
@@ -22,10 +20,8 @@ describe 'Admin registrers lessons' do
   end
 
   it 'and fill and fields' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                            code: 'RUBYBASIC', price: 10,
-                            enrollment_deadline: '22/12/2033', instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
     
     user_login
     visit admin_course_path(course)
@@ -38,11 +34,8 @@ describe 'Admin registrers lessons' do
   end
 
   it 'must be logged in to create lesson' do
-    instructor = Instructor.create!(name: 'Maria', email: 'maria@email.com')
-    course = Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
-                            code: 'RUBYBASIC', price: 10,
-                            enrollment_deadline: '22/12/2033',
-                            instructor: instructor)
+    instructor = create(:instructor)
+    course = create(:course, instructor: instructor)
 
     visit new_admin_course_lesson_path(course)
 
