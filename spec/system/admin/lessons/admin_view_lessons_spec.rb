@@ -29,7 +29,7 @@ describe 'Admin view lessons' do
 
     expect(page).to have_text('Não tem aulas cadastradas.')
   end
-  
+
   it 'and view content' do
     instructor = create(:instructor)
     course = create(:course, instructor: instructor)

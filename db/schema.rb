@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_022348) do
+ActiveRecord::Schema.define(version: 2021_07_10_005728) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -43,12 +43,13 @@ ActiveRecord::Schema.define(version: 2021_07_07_022348) do
   create_table "courses", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "code"
     t.date "enrollment_deadline"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "price"
     t.integer "instructor_id", null: false
+    t.string "code"
+    t.index ["code"], name: "index_courses_on_code", unique: true
     t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
 
@@ -64,20 +65,22 @@ ActiveRecord::Schema.define(version: 2021_07_07_022348) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "name"
-    t.string "email"
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
+    t.index ["email"], name: "index_instructors_on_email", unique: true
   end
 
   create_table "lessons", force: :cascade do |t|
-    t.string "name"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "course_id", null: false
     t.integer "duration"
+    t.string "name"
     t.index ["course_id"], name: "index_lessons_on_course_id"
+    t.index ["name"], name: "index_lessons_on_name", unique: true
   end
 
   create_table "students", force: :cascade do |t|

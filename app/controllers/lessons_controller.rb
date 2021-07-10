@@ -3,8 +3,7 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show]
   before_action :student_has_enrollment, only: %i[show]
 
-  def show
-  end
+  def show; end
 
   private
 

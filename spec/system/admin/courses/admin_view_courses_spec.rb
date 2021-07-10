@@ -4,9 +4,9 @@ describe 'Admin view courses' do
   it 'successfully' do
     instructor = create(:instructor)
     create(:course, name: 'Ruby', description: 'Um curso de Ruby',
-           price: 10, instructor: instructor)
+                    price: 10, instructor: instructor)
     create(:course, name: 'Ruby on Rails', instructor: instructor,
-           description: 'Um curso de Ruby on Rails', price: 20)
+                    description: 'Um curso de Ruby on Rails', price: 20)
 
     user_login
     visit root_path
@@ -23,9 +23,9 @@ describe 'Admin view courses' do
   it 'and view details' do
     instructor = create(:instructor)
     course = create(:course, name: 'Ruby on Rails', instructor: instructor,
-                    description: 'Um curso de Ruby on Rails', price: 20,
-                    enrollment_deadline: '20/12/2033',
-                    banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
+                             description: 'Um curso de Ruby on Rails', price: 20,
+                             enrollment_deadline: '20/12/2033',
+                             banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
 
     user_login
     visit root_path
@@ -64,7 +64,7 @@ describe 'Admin view courses' do
   it 'and return to promotions page' do
     instructor = create(:instructor)
     create(:course, instructor: instructor)
-                   
+
     user_login
     visit root_path
     click_on 'Cursos'
@@ -73,7 +73,7 @@ describe 'Admin view courses' do
 
     expect(current_path).to eq admin_courses_path
   end
-  
+
   it 'must be logged in to view courses button' do
     visit root_path
 
@@ -93,5 +93,5 @@ describe 'Admin view courses' do
     visit admin_course_path(course)
 
     expect(current_path).to eq(new_user_session_path)
-   end
+  end
 end

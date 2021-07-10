@@ -2,8 +2,7 @@ class CoursesController < ApplicationController
   before_action :authenticate_student!, only: %i[my_courses]
   before_action :set_course, only: %i[show enroll]
 
-  def show
-  end
+  def show; end
 
   def enroll
     current_student.enrollments.create!(course: @course, price: @course.price)

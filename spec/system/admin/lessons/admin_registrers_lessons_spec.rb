@@ -4,7 +4,7 @@ describe 'Admin registrers lessons' do
   it 'successfully' do
     instructor = create(:instructor)
     course = create(:course, instructor: instructor)
-    
+
     user_login
     visit admin_course_path(course)
     click_on 'Registrar uma aula'
@@ -22,7 +22,7 @@ describe 'Admin registrers lessons' do
   it 'and fill and fields' do
     instructor = create(:instructor)
     course = create(:course, instructor: instructor)
-    
+
     user_login
     visit admin_course_path(course)
     click_on 'Registrar uma aula'

@@ -11,7 +11,7 @@ describe 'Admin registers instructors' do
   it 'successfully' do
     visit instructors_path
     click_on 'Registrar professor(a)'
-    
+
     fill_in 'Nome', with: 'Maria'
     fill_in 'E-mail', with: 'maria@email.com'
     fill_in 'Descrição', with: 'Formada em Ciências da Computação e leciona há 9 anos'
@@ -29,7 +29,7 @@ describe 'Admin registers instructors' do
   it 'and attributes cannot be blank' do
     visit instructors_path
     click_on 'Registrar professor(a)'
-    
+
     fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Descrição', with: ''

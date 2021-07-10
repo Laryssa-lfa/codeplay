@@ -2,8 +2,7 @@ class Admin::LessonsController < Admin::AdminController
   before_action :set_lesson, only: %i[show edit update destroy]
   before_action :set_course
 
-  def show
-  end
+  def show; end
 
   def new
     @lesson = Lesson.new
@@ -18,8 +17,7 @@ class Admin::LessonsController < Admin::AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @lesson.update(lesson_params)

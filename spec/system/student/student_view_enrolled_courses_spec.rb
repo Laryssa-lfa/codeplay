@@ -8,7 +8,7 @@ describe 'Student view enrolled courses' do
     other_course = create(:course, name: 'Ruby on Rails', price: 20, instructor: instructor)
     enrollment1 = Enrollment.create!(student: student, course: course, price: course.price)
     enrollment2 = Enrollment.create!(student: student, course: other_course, price: other_course.price)
-    
+
     visit root_path
     click_on 'Meus Cursos'
 

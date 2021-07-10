@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe 'Student view courses on homepage' do
   it 'courses with enrollment still available' do
-    instructor = instructor = create(:instructor)
+    instructor = create(:instructor)
     available_course = create(:course, name: 'Ruby', price: 10, instructor: instructor)
-    unavailable_course = create(:course, :expired, name: 'HTML', price: 20,
-                                instructor: instructor)
+    create(:course, :expired, name: 'HTML', price: 20, instructor: instructor)
 
     visit root_path
 
@@ -28,10 +27,10 @@ describe 'Student view courses on homepage' do
   end
 
   it 'and does not view enrollment if deadline is over' do
-    instructor = instructor = create(:instructor)
-    available_course = create(:course, name: 'Ruby', price: 10, instructor: instructor)
-    unavailable_course = create(:course, :expired, name: 'HTML', price: 12,
-                                instructor: instructor, description: 'Um curso de HTML')
+    instructor = create(:instructor)
+    create(:course, name: 'Ruby', price: 10, instructor: instructor)
+    create(:course, :expired, name: 'HTML', price: 12, instructor: instructor,
+                              description: 'Um curso de HTML')
 
     student_login
     visit root_path

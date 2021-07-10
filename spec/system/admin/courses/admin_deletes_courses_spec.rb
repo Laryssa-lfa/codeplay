@@ -4,7 +4,7 @@ describe 'Admin deletes courses' do
   it 'successfully' do
     instructor = create(:instructor)
     course = create(:course, instructor: instructor)
-    
+
     user_login
     visit admin_course_path(course)
     expect { click_on 'Apagar Curso' }.to change { Course.count }.by(-1)

@@ -5,7 +5,7 @@ describe 'admin updates courses' do
     instructor = create(:instructor)
     create(:instructor, name: 'João', email: 'joao@email.com')
     course = create(:course, instructor: instructor)
-                       
+
     user_login
     visit admin_course_path(course)
     click_on 'Editar Curso'

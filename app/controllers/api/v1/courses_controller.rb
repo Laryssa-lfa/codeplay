@@ -1,5 +1,4 @@
 class Api::V1::CoursesController < Api::V1::ApiController
-
   def index
     @courses = Course.all
     render json: @courses
@@ -21,19 +20,19 @@ class Api::V1::CoursesController < Api::V1::ApiController
   def update
     @course = Course.find_by!(code: params[:code])
     @course.update!(course_params)
-    render json: @course, status: 200
+    render json: @course, status: :ok
   end
 
   def destroy
     @course = Course.find_by!(code: params[:code])
     @course.destroy!
-    render json: @course, status: 200
+    render json: @course, status: :ok
   end
 
   private
 
-    def course_params
-        params.require(:course).permit(:name, :description, :code, :price, :banner,
-                                       :enrollment_deadline, :instructor_id, :lessons)
-    end
+  def course_params
+    params.require(:course).permit(:name, :description, :code, :price, :banner,
+                                   :enrollment_deadline, :instructor_id, :lessons)
+  end
 end

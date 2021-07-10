@@ -6,7 +6,7 @@ describe 'Courses API' do
       instructor = create(:instructor)
       create(:course, name: 'Ruby', instructor: instructor)
       create(:course, name: 'Ruby on Rails', instructor: instructor,
-             banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
+                      banner: fixture_file_upload(Rails.root.join('spec/fixtures/banner.png')))
 
       get '/api/v1/courses'
 
@@ -31,7 +31,7 @@ describe 'Courses API' do
       instructor = create(:instructor)
       create(:course, code: 'RUBYONRAILS', instructor: instructor)
       course = create(:course, name: 'Ruby', description: 'Um curso de Ruby',
-                    code: 'RUBYBASIC', price: 10, instructor: instructor)
+                               code: 'RUBYBASIC', price: 10, instructor: instructor)
 
       get "/api/v1/courses/#{course.code}"
 
@@ -80,7 +80,7 @@ describe 'Courses API' do
 
     it 'code must be unique' do
       instructor = create(:instructor)
-      course = create(:course, code: 'RUBYBASIC', instructor: instructor)
+      create(:course, code: 'RUBYBASIC', instructor: instructor)
 
       post '/api/v1/courses', params: {
         course: { name: 'Ruby on Rails', code: 'RUBYBASIC', price: 10,

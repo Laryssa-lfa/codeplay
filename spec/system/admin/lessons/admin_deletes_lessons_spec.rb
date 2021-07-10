@@ -5,7 +5,7 @@ describe 'Admin deletes lesson' do
     instructor = create(:instructor)
     course = create(:course, instructor: instructor)
     lesson = create(:lesson, course: course)
-    
+
     user_login
     visit admin_course_path(course)
     click_on lesson.name
